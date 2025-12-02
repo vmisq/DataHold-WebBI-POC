@@ -2045,7 +2045,7 @@ function makeDashboardEditor() {
             groups: groups,
         };
         const payload = LZString.compressToBase64(JSON.stringify(data));
-        const shareUrl = `${window.location.origin}/dashboard#${payload}`;
+        const shareUrl = `${window.location.origin}${window.location.pathname}dashboard#${payload}`;
         navigator.clipboard.writeText(shareUrl);
         window.open(shareUrl, "_blank");
     };
