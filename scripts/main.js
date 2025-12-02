@@ -2666,4 +2666,4 @@ async function watchCSS(url, intervalMs = 1000) {
 }
 
 // usage
-watchCSS("assets/styles.css", 1000);
+//watchCSS("assets/styles.css", 1000);
