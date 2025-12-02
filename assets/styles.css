@@ -323,7 +323,7 @@ button.icon-button.copy::before {
 
 .panel-content {
   height: calc(100% - var(--panel-header-height));
-  overflow: scroll;
+  overflow: auto;
 }
 
 .panel>div,
@@ -624,7 +624,7 @@ button.icon-button.copy::before {
 }
 
 #query-results-output .table-wrapper {
-  overflow: scroll;
+  overflow: auto;
   width: 100%;
   height: calc(100% - 40px);
 }
@@ -763,7 +763,7 @@ button.icon-button.copy::before {
 }
 
 #chart-form .chart-form-group {
-  overflow: scroll;
+  overflow: auto;
   padding: var(--padding);
 }
 
@@ -1380,7 +1380,7 @@ select option {
 }
 
 #dashboard-form-sortable {
-  overflow: scroll;
+  overflow: auto;
   height: calc(100% - 40px);
 }
 
