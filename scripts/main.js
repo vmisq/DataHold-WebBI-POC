@@ -2064,6 +2064,7 @@ function makeDashboardEditor() {
     const dashListModal = chartListModal.cloneNode(true);
     document.getElementById('dashboard-editor').appendChild(dashListModal)
     const dashListDialog = dashListModal.querySelector('.modal-dialog');
+    dashListDialog.querySelector('h3').textContent = 'Saved Dashboards';
     
     function prepModal() {
         chartListDialog.querySelector('button.refresh').addEventListener('click', (ev) => refreshChartList(chartListDialog.querySelector('ul')));
