@@ -1,0 +1,8 @@
+id,fileName,filePath,fileType
+userdata,userdata.parquet,"https://corsproxy.io/?https://www.timestored.com/data/sample/userdata.parquet",parquet
+table,table.parquet,"https://corsproxy.io/?https://www.timestored.com/data/sample/table.parquet",parquet
+titanic,titanic.parquet,"https://corsproxy.io/?https://www.timestored.com/data/sample/titanic.parquet",parquet
+iris,iris.parquet,"https://corsproxy.io/?https://www.timestored.com/data/sample/iris.parquet",parquet
+taq,taq.parquet,"https://corsproxy.io/?https://www.timestored.com/data/sample/pq/taq.parquet",parquet
+gold_vs_bitcoin,gold_vs_bitcoin.parquet,"https://corsproxy.io/?https://www.timestored.com/data/sample/pq/gold_vs_bitcoin.parquet",parquet
+search_trends,search_trends.parquet,"https://corsproxy.io/?https://www.timestored.com/data/sample/pq/search_trends.parquet",parquet

@@ -1,0 +1,232 @@
+:root {
+    /* Table colors */
+    --grid-bg: #1e1e2f;
+    --grid-header-bg: #2c2c3e;
+    --grid-footer-bg: #2c2c3e;
+    --grid-hover-bg: #3a3a50;
+    --grid-selected-bg: #3a3a50;
+    --grid-stripe-bg: #23232f;
+
+    /* Borders */
+    --grid-border-width: 1px;
+    --grid-border-style: solid;
+    --grid-border-color: #44475a;
+    --grid-border-radius: 0px;
+
+    /* Text */
+    --grid-text: #e0e0e0;
+    --grid-muted-text: #ccc;
+    --grid-disabled-text: #666;
+
+    /* Inputs */
+    --grid-input-bg: #1e1e2f;
+    --grid-input-border: #44475a;
+    --grid-input-focus: #9bc2f7;
+
+    /* Resizer */
+    --grid-resize-hover: #9bc2f7;
+
+    /* Padding & spacing */
+    --grid-padding-td: 4px 6px;
+    --grid-padding-th: 8px 12px;
+
+    /* Table width */
+    --grid-min-width: 300px;
+    --grid-max-width: 1200px;
+}
+
+.gridjs-search::before {
+    content: 'Search in results';
+}
+.gridjs-container{
+    height: 100%;
+}
+.gridjs-head {
+    height: 30px;
+}
+.gridjs-head * {
+    height: 100%;
+}
+.gridjs-footer {
+    height: 30px;
+}
+.gridjs-footer * {
+    height: 100%;
+}
+.gridjs-pagination {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    align-items: center;
+    gap: 30px;
+}
+.gridjs-pagination * {
+    align-items: center;
+}
+/* Wrapper with soft max/min widths 
+.gridjs-wrapper {
+    width: 100%;
+    height: calc(100% - 30px - 30px) !important;
+    min-width: var(--grid-min-width);
+    max-width: var(--grid-max-width);
+    overflow: scroll;
+    border-radius: var(--grid-border-radius) var(--grid-border-radius) 0 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    border-top: var(--grid-border-width) var(--grid-border-style) var(--grid-border-color);
+    position: relative;
+    z-index: 1;
+}
+*/
+/* Table
+table.gridjs-table {
+    width: 100%;
+    height: 100% !important;
+    table-layout: fixed;
+    border-collapse: collapse;
+    background-color: var(--grid-bg);
+    color: var(--grid-text);
+    border-radius: var(--grid-border-radius);
+    border: var(--grid-border-width) var(--grid-border-style) var(--grid-border-color);
+}
+*/
+
+.gridjs-wrapper {
+    width: 100%;
+    height: calc(100% - 30px - 30px) !important;
+    min-width: var(--grid-min-width);
+    max-width: var(--grid-max-width);
+    overflow-y: auto;
+    overflow-x: auto;
+    border-radius: var(--grid-border-radius) var(--grid-border-radius) 0 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    border-top: var(--grid-border-width) var(--grid-border-style) var(--grid-border-color);
+    position: relative;
+    z-index: 1;
+}
+
+table.gridjs-table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    background-color: var(--grid-bg);
+    color: var(--grid-text);
+    border-radius: var(--grid-border-radius);
+    border: var(--grid-border-width) var(--grid-border-style) var(--grid-border-color);
+}
+
+thead.gridjs-thead {
+    position: sticky;
+    top: 0;
+    z-index: 11;
+}
+
+/* Table body */
+.gridjs-tbody,
+td.gridjs-td {
+    background-color: var(--grid-bg);
+    color: var(--grid-text);
+    padding: var(--grid-padding-td);
+    border: var(--grid-border-width) var(--grid-border-style) var(--grid-border-color);
+    box-sizing: content-box;
+    transition: background-color 0.2s ease;
+}
+
+/* First/last child adjustments */
+td.gridjs-td:first-child {
+    border-left: none;
+}
+
+td.gridjs-td:last-child {
+    border-right: none;
+}
+
+/* Hover and striped rows */
+.gridjs-tbody tr:hover td {
+    background-color: var(--grid-hover-bg);
+}
+
+.gridjs-tbody tr:nth-child(even) td {
+    background-color: var(--grid-stripe-bg);
+}
+
+/* Selected row */
+.gridjs-tr-selected td {
+    background-color: var(--grid-selected-bg);
+}
+
+/* Table header */
+th.gridjs-th {
+    background-color: var(--grid-header-bg);
+    color: var(--grid-muted-text);
+    padding: var(--grid-padding-th);
+    border: var(--grid-border-width) var(--grid-border-style) var(--grid-border-color);
+    border-top: none;
+    border-radius: var(--grid-border-radius);
+    white-space: nowrap;
+    vertical-align: middle;
+    position: relative;
+    outline: none;
+    transition: background-color 0.2s ease;
+    min-width: none;
+}
+
+th.gridjs-th-sort:focus,
+th.gridjs-th-sort:hover {
+    background-color: var(--grid-hover-bg);
+}
+
+/* Footer */
+.gridjs-footer {
+    background-color: var(--grid-footer-bg);
+    border-top: var(--grid-border-width) var(--grid-border-style) var(--grid-border-color);
+    border-radius: 0 0 var(--grid-border-radius) var(--grid-border-radius);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    padding: var(--grid-padding-td);
+    color: var(--grid-muted-text);
+}
+
+/* Inputs */
+input.gridjs-input {
+    background-color: var(--grid-input-bg);
+    border: var(--grid-border-width) var(--grid-border-style) var(--grid-input-border);
+    border-radius: var(--grid-border-radius);
+    padding: var(--grid-padding-td);
+    color: var(--grid-text);
+}
+
+input.gridjs-input:focus {
+    border-color: var(--grid-input-focus);
+    box-shadow: 0 0 0 3px rgba(149, 189, 243, 0.5);
+    background-color: var(--grid-hover-bg);
+}
+
+/* Pagination buttons */
+.gridjs-pagination .gridjs-pages button {
+    background-color: var(--grid-header-bg);
+    border: var(--grid-border-width) var(--grid-border-style) var(--grid-border-color);
+    padding: var(--grid-padding-td);
+    color: var(--grid-text);
+    user-select: none;
+}
+
+.gridjs-pagination .gridjs-pages button:hover {
+    background-color: var(--grid-hover-bg);
+}
+
+.gridjs-pagination .gridjs-pages button:disabled {
+    color: var(--grid-disabled-text);
+}
+
+/* Resizer */
+.gridjs-resizable {
+    bottom: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 5px;
+}
+
+.gridjs-resizable:hover {
+    background-color: var(--grid-resize-hover);
+    cursor: ew-resize;
+}

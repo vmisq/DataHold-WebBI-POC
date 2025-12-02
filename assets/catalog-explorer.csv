@@ -1,0 +1,13 @@
+id,parentId,name,displayName,type
+0,0,org_only,This feature is only available for organizations,exception
+1,1,org_only,This feature is only available for organizations,exception
+2,2,org_app_only,This feature is only available for organizations or in the desktop application,exception
+101,3,public_url,Public URL,folder
+102,3,uploaded_file,Uploaded Files,folder
+103,101,userdata.parquet,userdata.parquet,file
+104,101,table.parquet,table.parquet,file
+105,101,titanic.parquet,titanic.parquet,file
+106,101,iris.parquet,iris.parquet,file
+107,101,taq.parquet,taq.parquet,file
+108,101,gold_vs_bitcoin.parquet,gold_vs_bitcoin.parquet,file
+109,101,search_trends.parquet,search_trends.parquet,file

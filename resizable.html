@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Resizable Panels</title>
+<style>
+html, body {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  font-family: sans-serif;
+}
+
+body > * {
+  flex: 1
+}
+
+#resetBtn {
+  margin: 5px;
+}
+
+.container {
+  display: flex;
+  border: 1px solid #333;
+  overflow: hidden;
+}
+
+.v-resizable {
+  flex-direction: column;
+}
+
+.h-resizable {
+  flex-direction: row;
+}
+
+.handle {
+  background: #666;
+  position: relative;
+}
+
+.v-resizable > .handle {
+  height: 8px;
+  width: 100%;
+  cursor: row-resize;
+}
+
+.h-resizable > .handle {
+  width: 8px;
+  height: 100%;
+  cursor: col-resize;
+}
+
+.panel {
+  flex: 1; /* will be recalculated dynamically*/
+  min-width: 0px;
+  min-height: 0px;
+  border: 1px solid #333;
+  position: relative;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+
+
+
+</style>
+</head>
+<body>
+
+<button id="resetBtn">Reset Size</button>
+
+<div id="container1" class="container h-resizable">
+  <div>No Resize</div>
+  <div id="panel1" class="panel">Panel 1</div>
+  <div id="handle1" class="handle" defaultSplitPosition="20"></div>
+  <div id="panel2" class="panel">Panel 2</div>
+  <div id="handle2" class="handle" defaultSplitPosition="60"></div>
+  <div id="panel3" class="panel">Panel 3</div>
+  <div id="handle3" class="handle" defaultSplitPosition="80"></div>
+  <div id="panel4" class="panel">Panel 3</div>
+</div>
+<div id="container2" class="container v-resizable">
+  <div class="panel">Panel 1</div>
+  <div class="handle" defaultSplitPosition="20"></div>
+  <div class="panel">Panel 2</div>
+  <div class="handle" defaultSplitPosition="60"></div>
+  <div class="panel">Panel 3</div>
+  <div class="handle" defaultSplitPosition="80"></div>
+  <div class="panel">Panel 3</div>
+</div>
+
+<script>
+function makeResizable(container, resetBtn) {
+  let activeHandle = null;
+  const handles = Array.from(container.querySelectorAll('.handle'));
+  
+  function setFlexFromHandles(container) {
+    let currentPosition = 0;
+    let lastChild = null
+    Array.from(container.children).forEach((child, i) => {
+      if (child.className == 'handle') {
+        const splitPosition = child.getAttribute('splitPosition');
+        container.children[i-1].style.flex = splitPosition - currentPosition;
+        currentPosition = splitPosition;
+      }
+      lastChild = child;
+    });
+    lastChild.style.flex = 100 - currentPosition;
+  }
+  
+  function resize(e, initialSplitPositions) {
+    if (!activeHandle) return;
+    console.log(e);
+    const containerRect = container.getBoundingClientRect();
+    let newSplitPosition
+    if (container.classList.contains('h-resizable')) {
+      newSplitPosition = ((e.clientX - containerRect.left) / containerRect.width * 100);
+    } else {
+      newSplitPosition = ((e.clientY - containerRect.top) / containerRect.height * 100);
+    };
+    console.log(newSplitPosition);
+    newSplitPosition = Math.max(0, Math.min(newSplitPosition, 100));
+    activeHandle.setAttribute('splitPosition', newSplitPosition);
+    let beforeactiveHandle = true
+    handles.forEach((h, i) => {
+      if (h == activeHandle) {
+        beforeactiveHandle = false
+      };
+      if (beforeactiveHandle) {
+        h.setAttribute('splitPosition', Math.min(newSplitPosition, Math.max(h.getAttribute('splitPosition'), initialSplitPositions[i])));
+      } else {
+        h.setAttribute('splitPosition', Math.max(newSplitPosition, Math.min(h.getAttribute('splitPosition'), initialSplitPositions[i])));
+      };
+    });
+    setFlexFromHandles(container);
+  }
+
+  function stopResize() {
+    activeHandle = null;
+    document.removeEventListener('mousemove', resize);
+    document.removeEventListener('mouseup', stopResize);
+  }
+  
+  handles.forEach(h => {
+    h.setAttribute('splitPosition', h.getAttribute('defaultSplitPosition'));
+  });
+  
+  setFlexFromHandles(container);
+  
+  resetBtn.addEventListener('click', () => {
+    handles.forEach(h => {
+      h.setAttribute('splitPosition', h.getAttribute('defaultSplitPosition'))
+    });
+    setFlexFromHandles(container);
+  });
+  
+  handles.forEach(h => {
+    h.addEventListener('mousedown', e => {
+      activeHandle = h;
+      let initialSplitPositions = handles.map(x => x.getAttribute('splitPosition'));
+      console.log('clicked');
+      document.addEventListener('mousemove', e => resize(e, initialSplitPositions));
+      document.addEventListener('mouseup', stopResize);
+      e.preventDefault();
+    });
+  });
+}
+
+const resetBtn = document.getElementById('resetBtn');
+Array.from(document.querySelectorAll('.h-resizable, .v-resizable')).forEach(
+  c => makeResizable(c, resetBtn)
+);
+
+</script>
+
+</body>
+</html>
